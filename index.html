@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Details Popup</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        position: relative;
+        min-height: 100vh;
+    }
+
+    .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        max-width: 400px;
+        display: none;
+    }
+
+    .popup.active {
+        display: block;
+    }
+
+    .close {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .close:hover {
+        color: #ff0000;
+    }
+
+    h2 {
+        margin-top: 0;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .input-group input {
+        width: calc(100% - 20px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="popup" id="userDetailsPopup">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Enter Your Details</h2>
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+        <button class="btn" onclick="submitDetails()">Submit</button>
+    </div>
+</div>
+
+<script>
+    // Function to show the popup after 5 seconds, only if it hasn't been shown before
+    if (!sessionStorage.getItem('popupShown')) {
+        setTimeout(function() {
+            document.getElementById('userDetailsPopup').classList.add('active');
+            sessionStorage.setItem('popupShown', 'true');
+        }, 5000);
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        document.getElementById('userDetailsPopup').classList.remove('active');
+    }
+
+    // Function to submit user details
+    function submitDetails() {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        
+        // Here you can perform further actions like sending the data to a server
+        
+        // For demo purposes, let's just log the details to console
+        console.log("Name: " + name + ", Email: " + email);
+        
+        // Closing the popup after submission
+        closePopup();
+    }
+</script>
+
+</body>
+</html>
